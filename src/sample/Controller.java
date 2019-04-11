@@ -1,23 +1,24 @@
 package sample;
 
-        import java.net.URL;
-        import java.sql.Connection;
-        import java.sql.PreparedStatement;
-        import java.sql.ResultSet;
-        import java.util.ResourceBundle;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.fxml.Initializable;
-        import javafx.scene.Node;
-        import javafx.scene.Scene;
-        import javafx.scene.control.Alert;
-        import javafx.scene.control.Alert.AlertType;
-        import javafx.scene.control.PasswordField;
-        import javafx.scene.control.TextField;
-        import javafx.stage.Stage;
+import java.net.URL;
+import java.sql.*;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
+
+    @FXML
+    private TextField whoLog;
 
     @FXML
     private TextField textLogin;
@@ -33,14 +34,14 @@ public class Controller implements Initializable {
     ResultSet resultSet = null;
 
     public Controller() {
+
         connection = Globals.connectdb();
     }
-
-
 
     public void loginAction(ActionEvent event){
         String login = textLogin.getText();
         String password = textPassword.getText();
+
 
         String sql = "SELECT * FROM LoginEmp WHERE login = ? and password = ?";
 
@@ -64,9 +65,34 @@ public class Controller implements Initializable {
         catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
+    public void logoutAction(ActionEvent actionEvent) {
+        Node node = (Node) actionEvent.getSource();
+        dialogStage = (Stage) node.getScene().getWindow();
+        dialogStage.setScene(scene);
+        dialogStage.close();
+
+        String log = whoLog.getText();
+
+        String sql = "SELECT * FROM LoginEmp WHERE login = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, log);
+
+            ResultSet rs = (ResultSet) preparedStatement;
+
+            rs.next();
+            String first = rs.getString("login");
+
+            whoLog.setText(first);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public static void infoBox(String infoMessage, String headerText, String title){
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -83,5 +109,4 @@ public class Controller implements Initializable {
 
 
     }
-
 }

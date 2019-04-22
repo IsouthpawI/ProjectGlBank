@@ -36,9 +36,12 @@ public class Controller implements Initializable {
         connection = Globals.connectdb();
     }
 
-    public void loginAction(ActionEvent event){
+    public Employee loginAction(ActionEvent event){
         String login = textLogin.getText();
         String password = textPassword.getText();
+
+//        Database database = Database.getInstanceOfDatabase();
+//        Employee emp = database.getEmployee(login, password);
 
 
         String sql = "SELECT * FROM LoginEmp WHERE login = ? and password = ?";
@@ -58,12 +61,36 @@ public class Controller implements Initializable {
                 scene = new Scene(FXMLLoader.load(getClass().getResource("sample1.fxml")));
                 dialogStage.setScene(scene);
                 dialogStage.show();
-
+//                Logged logged = scene.getController();
+//                logged.setEmployee(emp);
             }
+
+            ResultSet rs;
+
+            try {
+                PreparedStatement stmnt = connection.prepareStatement(sql);
+                rs = stmnt.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String fname = rs.getString("fname");
+                    String lname = rs.getString("lname");
+                    int position = rs.getInt("position");
+
+                    Employee employee = new Employee(id, fname, lname, position);
+                    return employee;
+                }
+                connection.close();
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
         catch(Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
 //    public void logoutAction(ActionEvent actionEvent) {

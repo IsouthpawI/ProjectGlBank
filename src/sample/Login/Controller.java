@@ -40,10 +40,6 @@ public class Controller implements Initializable {
         String login = textLogin.getText();
         String password = textPassword.getText();
 
-//        Database database = Database.getInstanceOfDatabase();
-//        Employee emp = database.getEmployee(login, password);
-
-
         String sql = "SELECT * FROM LoginEmp WHERE login = ? and password = ?";
 
         try{
@@ -61,8 +57,7 @@ public class Controller implements Initializable {
                 scene = new Scene(FXMLLoader.load(getClass().getResource("sample1.fxml")));
                 dialogStage.setScene(scene);
                 dialogStage.show();
-//                Logged logged = scene.getController();
-//                logged.setEmployee(emp);
+
             }
 
             ResultSet rs;
@@ -92,33 +87,6 @@ public class Controller implements Initializable {
         }
         return null;
     }
-
-//    public void logoutAction(ActionEvent actionEvent) {
-//        Node node = (Node) actionEvent.getSource();
-//        dialogStage = (Stage) node.getScene().getWindow();
-//        dialogStage.setScene(scene);
-//        dialogStage.close();
-//
-//        String log = whoLog.getText();
-//
-//        String sql = "SELECT * FROM LoginEmp WHERE login = ?";
-//
-//        try {
-//            preparedStatement = connection.prepareStatement(sql);
-//
-//            preparedStatement.setString(1, log);
-//
-//            ResultSet rs = (ResultSet) preparedStatement;
-//
-//            rs.next();
-//            String first = rs.getString("login");
-//
-//            whoLog.setText(first);
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
 
     public static void infoBox(String infoMessage, String headerText, String title){
         Alert alert = new Alert(AlertType.CONFIRMATION);

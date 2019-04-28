@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GlBank.iml" filepath="$PROJECT_DIR$/GlBank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projectGlBank.iml" filepath="$PROJECT_DIR$/projectGlBank.iml" />
     </modules>
   </component>
 </project>

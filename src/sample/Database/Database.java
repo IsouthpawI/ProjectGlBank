@@ -20,21 +20,26 @@ public class Database {
 
     private static Database db = new Database();
 
+    PreparedStatement pst = null;
+
     private Database(){
 
     }
 
     public static Database getInstance() {
+
         return db;
     }
 
+    Connection conn = null;
+
     public static Connection getConnection(){
-        Connection connection;
+//        Connection connection;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("DriverLoaded");
-            connection = DriverManager.getConnection(Globals.url, Globals.username, Globals.password);
-            return connection;
+//            connection = DriverManager.getConnection(Globals.url, Globals.username, Globals.password);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/glbank","root","");
+            return conn;
         }
         catch (ClassNotFoundException e){
             e.printStackTrace();
@@ -48,24 +53,23 @@ public class Database {
 
     public Employee compareEmployee(String name, String pass){
 
-        Connection conn = getConnection();
-        PreparedStatement pst = null;
+        Connection con = getConnection();
+
         ResultSet rs;
 
         try {
 
-            pst = conn.prepareStatement(Employee);
+            pst = con.prepareStatement(Employee);
             pst.setString(1,name);
             pst.setString(2,pass);
             rs = pst.executeQuery();
             while (rs.next()) {
                 System.out.println("OK");
 
-                Employee person = new Employee(rs.getString("fname"), rs.getString("lname"),
-                        rs.getInt("position"));
+                Employee person = new Employee(rs.getString("fname"), rs.getString("lname"), rs.getInt("position"));
                 return person;
             }
-            conn.close();
+            con.close();
 
         }catch (SQLException e){
             e.printStackTrace();

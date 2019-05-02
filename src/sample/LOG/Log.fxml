@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -60,21 +62,26 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Label fx:id="LogName" layoutX="26.0" layoutY="24.0" prefHeight="17.0" prefWidth="82.0">
+            <Label fx:id="LogName" layoutX="264.0" layoutY="24.0" prefHeight="17.0" prefWidth="82.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="LogSurname" layoutX="118.0" layoutY="24.0" prefHeight="25.0" prefWidth="82.0">
+            <Label fx:id="LogSurname" layoutX="346.0" layoutY="24.0" prefHeight="25.0" prefWidth="82.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="LogPosition" layoutX="240.0" layoutY="24.0" prefHeight="17.0" prefWidth="80.0">
+            <Label fx:id="LogPosition" layoutX="428.0" layoutY="24.0" prefHeight="17.0" prefWidth="80.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+            <ImageView fitHeight="79.0" fitWidth="129.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../15480946810_internet_banking.png" />
+               </image>
+            </ImageView>
          </children></Pane>
    </children>
 </AnchorPane>
